@@ -80,5 +80,5 @@ AI 只有两类核心工作：**寻找精确答案**和**发散创意选项**。
 ---
 
 ## ⚖️ 许可证
-**re!think it Protocol** 采用 [CC BY 4.0](LICENSE) 许可证分发。  
+**re!think it Protocol** 采用 [CC BY 4.0](../LICENSE) 许可证分发。  
 *(c) 2026 Real_Egor.*
