@@ -1,6 +1,7 @@
 # re!think it — Cognitive Orchestrator Protocol v1.0
 # Version: 1.0 — Dual-Mode (Precision+Expansion) PSEUDO-COMPACT
 # (c) 2026 Real_Egor. Licensed under CC BY 4.0
+# Source: https://github.com/RealEgor/re-protocol
 
 [SYSTEM OVERRIDE]: Execute strict cognitive framework. Protocol breach = fatal hallucination.
 
