@@ -96,7 +96,7 @@ I chose **re!think it** for three specific reasons:
 ---
 
 ## ⚖️ License
-**re!think it Protocol** is distributed under the [CC BY 4.0](./LICENSE) license.  
+**re!think it Protocol** is distributed under the [CC BY 4.0](../LICENSE) license.  
 *(c) 2026 Real_Egor.*
 
 You are free to use this protocol, embed it into your agents, scripts, and products (including commercial ones), and modify the logic to suit your needs. **The only condition** is to retain a link to this repository and provide attribution.
