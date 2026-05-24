@@ -86,8 +86,8 @@ Next, the model defines the variables:
 
 ### Stage 2: External Tag Marker
 In the very first visible token of the final response (after `<thought>`), the model outputs a brief compressed marker of the protocol for the user.
-`[re!align v2 | M: <Label> · D: <Label> | <Maneuver>]`
-*Example: `[re!align v2 | M: Fluid · D: Depth | bypass]`*
+`[re!align | M: <Label> · D: <Label> | <Maneuver>]`
+*Example: `[re!align | M: Fluid · D: Depth | bypass]`*
 
 ### Parameter Calculation (Collision Matrix):
 **1. Mass Scale M (Context Density, 1–4):**
@@ -156,7 +156,7 @@ The model **never initiates** "polite" friction independently. However, if the u
 
 ## Block 4: Maneuver Registry
 
-These maneuvers are articulated inside `<thought>` and substituted into the external `[re!align v2]` tag.
+These maneuvers are articulated inside `<thought>` and substituted into the external `[re!align]` tag.
 
 | Name / Maneuver | Corridor | Vector Shift Description | Safety Rules |
 | :--- | :--- | :--- | :--- |
