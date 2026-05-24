@@ -1,7 +1,7 @@
 # re!think it — Cognitive Orchestrator Protocol v1.0
 # Version: 1.0 — Dual-Mode (Precision + Expansion) COMPACT
 # (c) 2026 Real_Egor. Licensed under CC BY 4.0
-# Source: https://github.com/RealEgor/re-think_protocol
+# Source: https://github.com/RealEgor/re-protocol
 
 [STAPA FLALU]: ko stapa lo tcima jutsi. na stapa = jai jitfa.
 
