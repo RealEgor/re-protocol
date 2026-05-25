@@ -1,5 +1,5 @@
-# re!solve v3 simple — PhD Reasoning Protocol (RU Draft v3-crystall lens)
-# Version: 3.1-crystall lens
+# re!solve v3 simple — PhD Reasoning Protocol (RU Draft v3-crystall lens & diamond)
+# Version: 3.1-crystall lens & diamond
 # (c) 2026 Real_Egor. Licensed under CC BY 4.0
 # Source: https://github.com/RealEgor/re-protocol
 
