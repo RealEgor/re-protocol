@@ -163,3 +163,11 @@ See [`benchmarks/report.md`](benchmarks/report.md) — analysis of two cases fro
 - `hle_6736a9b0b949d548db8da965` — clinical case with Korsakoff symptoms. The descent led the model to the central statement "Korsakoff Syndrome" **together with a description of its supports** — including the key one: thiamine deficiency → ATP depletion. Without the descent the same model gave a surface paraphrase limited to the name of the diagnosis.
 
 ⚠️ **Important caveat.** Case `671f4997` demonstrates that **the descent mechanic itself works** — the theorem is extracted correctly. But the final answer in that run is still wrong: the model **broke its own conclusion** at the answer-assembly stage (cited ℓ∞ as an example, even though its own theorem rules that example out). This **doesn't undermine the descent as an extraction mechanic** — it points to a separate problem of tunnel vision, which lies outside Crystal Lensing and needs its own solution. Where this specific technique's responsibility ends: the descent guarantees **knowledge extraction**, it doesn't guarantee **its correct use in answer assembly**.
+
+---
+
+## Related research
+
+- **["Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs"](https://arxiv.org/abs/2603.09906)** (arxiv 2603.09906, March 2026) — Finds that reasoning improves recall on single-hop factual questions through "factual priming": generating topically related facts creates a semantic bridge to the target. A control experiment shows that re-injecting the intermediate facts as plain context reproduces nearly all the recall improvement — confirming the mechanism Crystalline Descent formalizes.
+
+- **["Empty Shelves or Lost Keys? Recall Is the Bottleneck for Parametric Factuality"](https://arxiv.org/abs/2602.14080)** (arxiv 2602.14080, 2026) — Systematically separates facts genuinely absent from weights ("empty shelves") from facts stored but unreachable via standard querying ("lost keys"). Their finding: frontier models retain 95–98% of tested facts in their weights — the bottleneck is access, not storage.

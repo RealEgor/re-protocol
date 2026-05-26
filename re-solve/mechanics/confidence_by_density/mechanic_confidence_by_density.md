@@ -157,3 +157,11 @@ See [`benchmarks/report.md`](benchmarks/report.md) — analysis of cases from th
 - `hle_6722b2777f84054950978f74` — modified logistic map: without the protocol the model confidently produces three incorrect formulas; with the protocol it keeps Liquid in the final density, declares 2 HIGH assumptions, and explicitly lowers confidence to 0.2.
 - `hle_673cc4885c871b3f9e026d02` — task with partially known material: the model itself sets K_min=4/10 and 2 fragility points, ending with conf=0.7. Calibration is non-trivial even on a failing case.
 - `hle_671a4ff987892bd153171067` — fractal dimension of Sidon products (Sonnet 4.6): the scale visibly operates **as a process** — 8 intermediate check-ins, self-catching of certainty-diluter words ("I believe" → an explicit MEDIUM assumption), audit of the fragility/assumption split, risk decomposition by H/M/L levels.
+
+---
+
+## Related research
+
+- **["LLM Confidence Evaluation Measures in Zero-Shot CSS Classification"](https://arxiv.org/abs/2410.13047)** (arxiv 2410.13047, 2024) — Tests categorical confidence labels (none / low / medium / high / absolute) against the standard numeric 0–1 format. Finds ordinal labels yield worse Expected Calibration Error than the float format — switching to a categorical format alone does not fix LLM confidence calibration.
+
+  > **Author's note.** Ordinal labels *low / medium / high* offer no real advantage over numbers like 0.3 / 0.5 / 0.8: neither comes with an algorithm telling the model *how* to arrive at the assessment — the label stays a feeling collapsed into a word. The Crystal / Liquid / Gas / Vacuum scale described here works for a different reason: its labels carry **concrete physical meaning**, not abstract confidence levels. The model doesn't need to be taught what "liquid" means — it already knows bonds are present but weak, shape holds globally but details flow under load. Categorical form only works when the categories carry **concrete meaning** the model already understands intuitively; abstract categories produce the same noise as numbers.
