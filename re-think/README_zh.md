@@ -6,7 +6,7 @@
 
 `re!think it` 是一套用于 LLM 注意力管理的系统级架构。该协议旨在防止长对话中的“注意力漂移”（Attention Drift），在生成响应前强制执行逻辑验证，并驱动模型输出高质量的非同质化内容（De-homogenized output）。
 
-📖 **延伸阅读：** [re!think it: A ~1,300-Token Prompt That Teaches LLMs to Reason](ESSAY_en.md) *(英文随笔，探讨这套协议的设计思路与底层逻辑)。*
+📖 **延伸阅读：** [re!think it: A ~1,300-Token Prompt That Teaches LLMs to Reason](../ESSAY_en.md) *(英文随笔，探讨这套协议的设计思路与底层逻辑)。*
 
 🧪 **实战案例：** [四个真实对话案例分析](examples_en.md) *(对比同一请求在有无协议情况下的 LLM 输出——涵盖商业策略、人力管理和技术架构三大领域，展示 HARD STOP、SOFT STOP、C_BYPASS 与 Assumptions 四种核心机制。)*
 
