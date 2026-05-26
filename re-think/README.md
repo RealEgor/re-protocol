@@ -6,7 +6,7 @@
 
 `re!think it` is a system architecture for LLM attention management. The protocol protects against context loss during long conversations (Attention Drift), forcefully verifies the model's logic before generating a response, and compels it to produce non-cliché ideas.
 
-📖 **Read the story:** [re!think it: A ~1,300-Token Prompt That Teaches LLMs to Reason](ESSAY_en.md) *(An essay sharing thoughts on the resulting product and why it works).*
+📖 **Read the story:** [re!think it: A ~1,300-Token Prompt That Teaches LLMs to Reason](../ESSAY_en.md) *(An essay sharing thoughts on the resulting product and why it works).*
 
 🧪 **See it in action:** [Real-World Examples: 4 Case Studies](examples_en.md) *(Side-by-side comparisons of LLM outputs with and without the protocol — HARD STOP, SOFT STOP, C_BYPASS, and Assumptions mechanics across business, HR, and technical domains).*
 
