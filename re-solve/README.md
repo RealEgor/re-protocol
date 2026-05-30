@@ -23,15 +23,36 @@ That's how the exploration began, driven by one inner conviction: the claim **"A
 
 ---
 
+## Preliminary preparation of the re-solve protocol
+
+To get started I had to take my earlier work — `re!think` and `re!align` — and put together the base version of the protocol (`re-solve_v2`) from the best parts of both:
+
+* **Variable extraction from the task** — the way it's done in [`re!think`](../re-think/). You operate separately on context (`C`), goal (`G`), tool (`T`), role (`R`), and verification criteria (`Vrf`). This lets you see which part of the task is in which state, and actually design a reasoning algorithm — instead of just asking the model "please, solve the task".
+
+* **Redirecting the model's base habits into useful qualities** — the way it's done in [`re!align`](../re-align/). At PhD level, three habits trained in by RLHF directly wreck answer quality, and each needs its own substitute:
+  * "be helpful and assist the user" → redirected into "be precise"
+  * "look competent, don't show uncertainty" → redirected into "pinpoint the competence the task actually needs"
+  * "finish the task at any cost and as fast as possible" → redirected into "don't lose any component of the solution"
+
+  > Why you can't fight these habits with prohibitions, and how to redirect them properly — covered in detail in a separate mechanic: [RLHF Redirection](mechanics/rlhf_redirection/mechanic_rlhf_redirection.md).
+
+* **Mandatory delta calculation** — "what's missing to solve this" — as the difference between `G` and `(C + T)`. In `re!think` this worked great as the trigger for `HardStop`. In `re-solve` the `HardStop` itself is gone, but the delta check stays — now it tells you where to direct further work, not when to stop and ask the user.
+
+* **Internet search tools** — I had to add these so there's somewhere to send the model to fill in the delta (the knowledge gaps the delta calculation just surfaced).
+
+Now let's look more closely at the new challenges that came up in `v2`, and what I did to fit the protocol to the realities of hard PhD-level tasks.
+
+---
+
 ## Key problems I entered `v2` with
 
-### 1. The model's excessive overconfidence
+### 1. The standard Confidence Score scale doesn't work and tells you nothing
 
 A standard Confidence Score doesn't work: models tend to rate it "around 0.7 in general", and for them that means no obstacles — they can go ahead and solve.
 
 To fight this:
 
-- **Localizing uncertainty through variable extraction** (inherited from `re!think`): `C` — context, `G` — goal, `T` — tool. This let me separate justified confidence in the tool from false confidence in the context.
+- **Relying on the C/G/T separation of the task** (see preliminary preparation) — lets you separate justified confidence in the tool from false confidence in the context.
 - **A new confidence scale — the aggregate state of knowledge.** The metaphor: knowledge is "the ground under your feet" while you reason. In an ordinary conversation it's fine to stand on soft soil. In PhD-level tasks there's only one path — a reinforced concrete foundation (**Crystal**). I deliberately didn't try to express the degree of Crystal in numbers; instead I explained to the model what reinforced-concrete confidence actually is (the kind where every next inference stays just as crystal-solid) and why **you can't synthesize an answer on liquid, let alone gaseous, knowledge** — the cascade of errors is guaranteed to crash the answer at those precision requirements.
 
 > This mechanic has been extracted into its own folder [`mechanics/confidence_by_density/`](mechanics/confidence_by_density/).
@@ -42,7 +63,7 @@ To fight this:
 
 There is related research on replacing numeric confidence with categorical labels: [arxiv 2410.13047](https://arxiv.org/abs/2410.13047) tests labels like *low / medium / high / absolute* against the standard 0–1 float. But this approach is fundamentally different from what I describe here. Ordinal labels like *low / medium / high* offer no real advantage over numbers like 0.3 / 0.5 / 0.8: in neither case is there an algorithm that tells the model *how* to arrive at the assessment — the label is still just a feeling collapsed into a word. What makes the Crystal / Liquid / Gas / Vacuum scale work is something different: these are terms the model understands at an intuitive level because physical states of matter are densely represented in training data with precise, consistent semantics. The model does not need to be taught what "liquid" means — it knows that bonds are present but weak, that shape is maintained globally but details flow under load. Carrying this over to the state of knowledge is an intuitive step, not a mapping that requires calibration. The choice of this particular analogy was not arbitrary: working with models I repeatedly observed them reaching for matter-state metaphors when describing their own knowledge — phrases like "mining crystal facts" appeared organically at every stage. I took that pattern seriously, formalized it, and it worked.
 
-### 2. Excessive haste in answering
+### 2. Ready to start writing the answer immediately, with no thinking
 
 Reasoning has basic phases you have to walk through honestly: write out the task, identify and write out the method (the tool), assess confidence in every input you need for synthesis, identify the missing knowledge. At this stage I assumed I'd launch an internet search — I thought that was the only way to find a missing theorem or article. That's how `v2` got its **solution phases**, which `re!think` didn't have.
 
@@ -121,6 +142,9 @@ Also in `v4` I confirmed that the aggregate states `Liquid` and `Gas` only show 
 
 - **Crystalline Descent works on all models.** It's especially important for `Haiku / Sonnet / Gemini Flash` — on these models most knowledge is initially in a `Gas` / `Liquid` state. On frontier models (`Opus`, `Gemini Pro`) the mechanic gives a lift too, though it's needed less often: their baseline rating is more often `Crystal` or `Liquid`, and `Gas` barely shows up — for them `Gas` usually means "on close approach we'll run into Vacuum". Even without internet search, models pull out most of the formulas they had seen only a couple of times in training. And this is **the ideal way to diagnose the delta** and put together a targeted internet query.  
   *Empirical evidence and case analysis:* mechanic description — [`mechanic_crystal_lensing.md`](mechanics/crystal_lensing/mechanic_crystal_lensing.md) (en) · [`mechanic_crystal_lensing_ru.md`](mechanics/crystal_lensing/mechanic_crystal_lensing_ru.md) (ru); benchmarks report — [`report.md`](mechanics/crystal_lensing/benchmarks/report.md) (en) · [`report_ru.md`](mechanics/crystal_lensing/benchmarks/report_ru.md) (ru).
+
+- **Redirecting habits trained in by RLHF.** This isn't a new mechanic for me — I'd already tried it on the [re!align](../re-align/) protocol, and I'm not going to spend much space on it here. All the logic, justification, and the curated reading list live in a separate file with the mechanic's description; at the end of that file there's a "Related research" block — plenty of works there, all circling around the same idea from different angles. What's new from my side? Just that I packed the idea into a practically usable chunk of the system prompt, trying to figure out (from a psychology-of-persuasion angle) how exactly to handle RLHF-trained habits so they work *for* the task instead of against it.  
+  *Description and analysis:* mechanic description — [`mechanic_rlhf_redirection.md`](mechanics/rlhf_redirection/mechanic_rlhf_redirection.md) (en) · [`mechanic_rlhf_redirection_ru.md`](mechanics/rlhf_redirection/mechanic_rlhf_redirection_ru.md) (ru).
 
 - **The algorithm is cognitively heavy for `Haiku`.** I hit the ceiling of what it can do — it has few Attention Heads. The protocol works substantially better on `Sonnet` and `Opus`, but I don't have enough budget for large-scale experiments on those models (a single task can run up to **70,000 output tokens**).
 

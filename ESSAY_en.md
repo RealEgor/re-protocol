@@ -139,7 +139,7 @@ Think about humans. Our working memory is famously limited. When we solve comple
 We don't need to wrap the model in external code to make it think. We need to write better, stricter cognitive contracts with the model itself.
 
 ### One Last Thing About Pseudo-Code
-The main defense against hallucination in my protocol is the strict structure and logging. But when I built a full [Chinese version](prompts/re-think/re-think_v1_zh.md) and its [compact equivalent](re-think/prompts/re-think_v1_zh_compact.md), I hit a wall. Even the compact Chinese version clocked in at around 2,100 tokens.
+The main defense against hallucination in my protocol is the strict structure and logging. But when I built a full [Chinese version](re-think/prompts/re-think_v1_zh.md) and its [compact equivalent](re-think/prompts/re-think_v1_zh_compact.md), I hit a wall. Even the compact Chinese version clocked in at around 2,100 tokens.
 
 So I asked myself: **What is the cheapest language for an LLM? What happens if you strip out every last word?**
 The answer was [pseudo-code](re-think/prompts/re-think_v1_pseudo_code.md). Token-wise, it lands at roughly the same ~1,300 as the English compact — but it turned out to be significantly more resistant to attention drift.
