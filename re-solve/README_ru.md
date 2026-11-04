@@ -27,7 +27,7 @@
 
 В начале мне потребовалось взять мои прошлые наработки `re!think` и `re!align` и собрать из них базовую версию протокола (`re-solve_v2`), которая включала всё самое полезное:
 
-* **Разделение задачи на переменные** — как это реализовано в [`re!think`](../re-think/). Отдельное оперирование контекстом (`C`), целью (`G`), инструментом (`T`), ролью (`R`) и критериями верификации (`Vrf`). Это позволяет видеть, какая часть задачи в каком состоянии, и не заниматься разработкой алгоритма размышления, а не просто просить модель "пожалуйста, реши  задачу".
+* **Разделение задачи на переменные** — как это реализовано в [`re!think`](../re-think/). Отдельное оперирование контекстом (`C`), целью (`G`), инструментом (`T`), ролью (`R`) и критериями верификации (`Vrf`). Это позволяет видеть, какая часть задачи в каком состоянии, и заниматься разработкой алгоритма размышления, а не просто просить модель "пожалуйста, реши задачу".
 
 * **Перенаправление базовых привычек модели в полезные качества** — как это реализовано в [`re!align`](../re-align/). На уровне PhD-задач три привычки, привитые RLHF, напрямую ломают качество ответа, и каждая из них требует своей замены:
   * «быть полезным и помогать пользователю» → перенаправляется в «быть аккуратным»
@@ -164,10 +164,52 @@
 
 ## Версии протокола
 
-- [`re-solve_v2_ru.md`](prompts/re-solve_v2_ru.md) — фазы и шкала плотности
-- [`re-solve_v3_1_crystall_lens_and_diamond_ru.md`](prompts/re-solve_v3_1_crystall_lens_and_diamond_ru.md) — Кристаллический Спуск, Бриллиант, Дельта и roadmap
-- [`re-solve_v3_6_vector_and_skills.md`](prompts/re-solve_v3_6_vector_and_skills.md) — векторная структура, библиотека скиллов
-- [`re-solve_v4_1_spiral_phases_ru.md`](prompts/re-solve_v4_1_spiral_phases_ru.md) — спиралеподобная архитектура, топология Бриллианта, проекции граней
+- 🇷🇺 [`re-solve_v2_ru.md`](prompts/re-solve_v2_ru.md) / 🇬🇧 [`re-solve_v2_en.md`](prompts/re-solve_v2_en.md) — v2: фазы и шкала плотности
+- 🇷🇺 [`re-solve_v3_1_crystall_lens_and_diamond_ru.md`](prompts/re-solve_v3_1_crystall_lens_and_diamond_ru.md) / 🇬🇧 [`re-solve_v3_1_crystall_lens_and_diamond_en.md`](prompts/re-solve_v3_1_crystall_lens_and_diamond_en.md) — v3.1: Кристаллический Спуск, Бриллиант, Дельта и roadmap
+- 🇷🇺 [`re-solve_v3_6_vector_and_skills_ru.md`](prompts/re-solve_v3_6_vector_and_skills_ru.md) / 🇬🇧 [`re-solve_v3_6_vector_and_skills_en.md`](prompts/re-solve_v3_6_vector_and_skills_en.md) — v3.6: векторная структура, библиотека скиллов
+- 🇷🇺 [`re-solve_v4_1_spiral_phases_ru.md`](prompts/re-solve_v4_1_spiral_phases_ru.md) / 🇬🇧 [`re-solve_v4_1_spiral_phases_en.md`](prompts/re-solve_v4_1_spiral_phases_en.md) — v4.1: спиралеподобная архитектура, топология Бриллианта, проекции граней
 
-Сопутствующий файл:
-- [`mechanics/topology_of_diamond/topology_of_diamond_ru.md`](mechanics/topology_of_diamond/topology_of_diamond_ru.md) — классификатор граней и топологий Бриллианта
+---
+
+## Архитектура механик
+
+Протокол `re!solve` декомпозирован на независимые модули-механики. Каждая механика оформлена отдельным описанием с теоретическим обоснованием и (для валидированных) отчётами бенчмарков.
+
+### Валидированные механики
+
+* **Оценка плотности знаний (Confidence by Density)**
+  * Описание: 🇷🇺 [`mechanic_confidence_by_density_ru.md`](mechanics/confidence_by_density/mechanic_confidence_by_density_ru.md) / 🇬🇧 [`mechanic_confidence_by_density.md`](mechanics/confidence_by_density/mechanic_confidence_by_density.md)
+  * Отчёт по бенчмаркам HLE: 🇷🇺 [`report_ru.md`](mechanics/confidence_by_density/benchmarks/report_ru.md) / 🇬🇧 [`report.md`](mechanics/confidence_by_density/benchmarks/report.md)
+  * Исходные прогоны бенчмарков: [`benchmarks/`](mechanics/confidence_by_density/benchmarks/)
+  * Суть: замена числового Confidence Score семантической шкалой агрегатных состояний (Crystal / Liquid / Gas / Vacuum) с алгоритмическим вычитанием штрафов за допущения.
+
+* **Кристаллический Спуск / Линзирование (Crystal Lensing)**
+  * Описание: 🇷🇺 [`mechanic_crystal_lensing_ru.md`](mechanics/crystal_lensing/mechanic_crystal_lensing_ru.md) / 🇬🇧 [`mechanic_crystal_lensing.md`](mechanics/crystal_lensing/mechanic_crystal_lensing.md)
+  * Отчёт по бенчмаркам HLE: 🇷🇺 [`report_ru.md`](mechanics/crystal_lensing/benchmarks/report_ru.md) / 🇬🇧 [`report.md`](mechanics/crystal_lensing/benchmarks/report.md)
+  * Исходные прогоны бенчмарков: [`benchmarks/`](mechanics/crystal_lensing/benchmarks/)
+  * Суть: пошаговое извлечение параметрических знаний из весов модели от фундаментальных аксиом до искомой теоремы без обращения к внешнему поиску.
+
+* **Перенаправление RLHF-привычек (RLHF Redirection)**
+  * Описание: 🇷🇺 [`mechanic_rlhf_redirection_ru.md`](mechanics/rlhf_redirection/mechanic_rlhf_redirection_ru.md) / 🇬🇧 [`mechanic_rlhf_redirection.md`](mechanics/rlhf_redirection/mechanic_rlhf_redirection.md)
+  * Суть: перенаправление выученных привычек модели («быть полезным», «выглядеть компетентным», «завершить любой ценой») в полезные качества исследователя вместо неработающих запретов.
+
+* **Топология Бриллианта (Topology of Diamond)**
+  * Описание: 🇷🇺 [`topology_of_diamond_ru.md`](mechanics/topology_of_diamond/topology_of_diamond_ru.md) / 🇬🇧 [`topology_of_diamond_en.md`](mechanics/topology_of_diamond/topology_of_diamond_en.md)
+  * Суть: универсальный классификатор извлечённого знания (грани, опоры, граничные условия, концептуальные двойники) для точных, естественных и гуманитарных дисциплин.
+
+### Гипотетические механики (в исследовании)
+
+* **Облако кандидатов (Candidate Cloud)**
+  * Описание: 🇷🇺 [`mechanic_candidate_cloud_ru.md`](hypothetical_mechanics/candidate_cloud/mechanic_candidate_cloud_ru.md) / 🇬🇧 [`mechanic_candidate_cloud.md`](hypothetical_mechanics/candidate_cloud/mechanic_candidate_cloud.md)
+  * Суть: борьба с туннельным зрением attention-механизма через подмену задачи: переход от «поиска ответа» к «доказательному исключению кандидатов из облака».
+
+* **Формула инсайта (Insight Formula)**
+  * Описание: 🇷🇺 [`mechanic_insight_formula_ru.md`](hypothetical_mechanics/insight_formula/mechanic_insight_formula_ru.md) / 🇬🇧 [`mechanic_insight_formula.md`](hypothetical_mechanics/insight_formula/mechanic_insight_formula.md)
+  * Суть: формализация генерации нетривиальных решений для задач, не выводимых прямой логикой (смена ролей, обратный трейс от формы ответа, метафорический прыжок, деструктивный тест).
+
+---
+
+## ⚖️ Лицензия
+
+Протокол **re!solve** распространяется по лицензии [CC BY 4.0](../LICENSE).  
+*(c) 2026 Real_Egor.*

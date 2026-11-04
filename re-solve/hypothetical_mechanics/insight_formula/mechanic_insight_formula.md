@@ -42,7 +42,7 @@ The possible scenarios:
 - **Method isn't defined in the task, but lives in the model's weights.** Then it has to be recalled, by focusing on the task and context, sometimes adopting the right role.
 - **Method isn't in the task and isn't in the weights in a directly usable form** — it lives in other knowledge domains, or it wasn't in the pretraining set at all.
 
-That third scenario is the most interesting and the hardest.
+That third scenario is the one that's interesting — and the hardest.
 
 ---
 
@@ -109,7 +109,7 @@ If none of them surfaces a method — move to Mechanism B.
 
 ### Mechanism B — Reverse Trace from Goal
 
-You should try **walking the task backwards** — from the goal and the preparatory steps. The method might start resonating somewhere on the 2nd, 3rd, or later step. Or it might just **be constructed by sequential backward inference**, walking from the answer's shape back to the class of methods.
+You should try **walking the task backwards** — from the goal and the preparatory steps. The method might start resonating somewhere on the 2nd, 3rd, or later step. Or you might just be able to **build it step by step backwards**, walking from the answer's shape to the class of methods.
 
 This mechanism works when the task is set up so the direct "conditions → method → answer" path doesn't add up, but the **shape of the expected answer** points to a class of methods that produce such answers. Each answer-form is produced by a narrow set of methods — narrowing by answer-form is often faster than narrowing by domain.
 
@@ -223,11 +223,11 @@ exists for that structure — move to Mechanism E.
 
 ## Bonus mechanism for both cases — Destructive Test
 
-Fundamentally different motion. Instead of looking for the **right** method, you take an **obviously wrong** one and trace it through the task to the **point of failure** — where this method stops working. **At that point, the method that would actually pass this failure point may start to resonate**, and that's a candidate solution.
+Fundamentally different motion. Instead of looking for the **right** method, you take an **obviously wrong** one and trace it through the task to the **point of failure** — where this method stops working. **At that point, the method that would actually solve or pass that breaking point may start to resonate** — and that's your candidate.
 
 This is **error as a navigation tool**. Not "method X didn't work, let me try Y", but a **deliberate** failure, so you can read in its shape a hint about the right direction. The breaking point shows **which property of the task** the chosen method doesn't account for — and that suggests which method actually fits.
 
-**Important caveat.** This mechanic is costly along two axes. First, it **fills up the context**: the model has to walk the wrong method all the way through to its breaking point, which eats tokens and attention. Second, and more importantly, **the breaking point contaminates the context**. The detailed walk through the wrong method leaves all of its steps in the context, and they're now physically present in the attention pattern for subsequent tokens. The model can involuntarily "drift back" to the wrong path even after finding the right direction — the contaminated tokens keep pulling attention onto themselves. That's why E is only used when A–D are exhausted, not as a substitute. And if you do use it — it helps to explicitly fix the right method as a "working hypothesis" in one clear line, so attention has a sharp landmark to lean on, bypassing the contaminated part of the context.
+**Important caveat.** This mechanic is costly along two axes. First, it **clogs up the context**: the model has to walk the wrong method all the way through to its breaking point, which eats tokens and attention. Second, and more importantly, **the breaking point contaminates the context**. The detailed walk through the wrong method leaves all of its steps in the context, and they're now physically present in the attention pattern for subsequent tokens. The model can involuntarily "drift back" to the wrong path even after finding the right direction — the contaminated tokens keep pulling attention onto themselves. That's why E is only used when A–D are exhausted, not as a substitute. And if you've already gone ahead with it — it helps to explicitly fix the right method as a "working hypothesis" in one clear line, so attention has a sharp landmark to lean on, bypassing the contaminated part of the context.
 
 **What this looks like in a prompt:**
 
@@ -259,9 +259,9 @@ A–D are exhausted.
 
 ## After finding a method — Double Role
 
-A method found via any of mechanisms A–E is a **hypothesis, not a fact**. A direct role crystallization gives you a method from inside its native discipline, where it's been polished for decades. An insight gives you a **guess** or a **synthesis** — often right, but sometimes a hallucination dressed up as insight.
+A method found via any of mechanisms A–E is a **hypothesis, not a fact**. A direct role crystallization gives you a method from inside its native discipline, where it's been polished over centuries. An insight gives you a **guess** or a **synthesis** — often right, but sometimes a hallucination dressed up as insight.
 
-That's why **any found or synthesized method has to be tested for stability and fit**. That's what the Double Role is for — an adversarial check of the insight.
+That's why **any found or synthesized method has to be tested for stability and correctness**. That's what the Double Role is for — an adversarial check of the insight.
 
 The model adopts **two roles simultaneously**:
 
@@ -314,7 +314,7 @@ This is a **cognitively heavy** mechanic. It requires the model to:
 - Walk through all the steps of the chosen mechanism without breaking discipline
 - Resist the first resonance — not take it as the final answer
 - Pass the two-role test in the Double Role
-- Then unpack all of this in the context window without losing thread
+- Then unpack all of this in the context window without losing discipline
 
 So the formula **doesn't fit models with fewer than 64 attention heads**. On smaller models (Haiku, Flash, local 7–30B), running it would either collapse mid-execution or eat the entire cognitive budget at the expense of the task itself.
 

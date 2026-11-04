@@ -164,10 +164,52 @@ Once development of the protocol is finished, this will be a ready **framework f
 
 ## Protocol versions
 
-- [`re-solve_v2_en.md`](prompts/re-solve_v2_en.md) — phases and the density scale
-- [`re-solve_v3_1_crystall_lens_and_diamond_ru.md`](prompts/re-solve_v3_1_crystall_lens_and_diamond_ru.md) — Crystalline Descent, Brilliant, Delta, and roadmap *(Russian only)*
-- [`re-solve_v3_6_vector_and_skills.md`](prompts/re-solve_v3_6_vector_and_skills.md) — vector structure, skill library
-- [`re-solve_v4_1_spiral_phases_en.md`](prompts/re-solve_v4_1_spiral_phases_en.md) — spiral-like architecture, Brilliant topology, facet projections
+- 🇬🇧 [`re-solve_v2_en.md`](prompts/re-solve_v2_en.md) / 🇷🇺 [`re-solve_v2_ru.md`](prompts/re-solve_v2_ru.md) — v2: phases and the density scale
+- 🇬🇧 [`re-solve_v3_1_crystall_lens_and_diamond_en.md`](prompts/re-solve_v3_1_crystall_lens_and_diamond_en.md) / 🇷🇺 [`re-solve_v3_1_crystall_lens_and_diamond_ru.md`](prompts/re-solve_v3_1_crystall_lens_and_diamond_ru.md) — v3.1: Crystalline Descent, Diamond, Delta, and roadmap
+- 🇬🇧 [`re-solve_v3_6_vector_and_skills_en.md`](prompts/re-solve_v3_6_vector_and_skills_en.md) / 🇷🇺 [`re-solve_v3_6_vector_and_skills_ru.md`](prompts/re-solve_v3_6_vector_and_skills_ru.md) — v3.6: vector structure, skill library
+- 🇬🇧 [`re-solve_v4_1_spiral_phases_en.md`](prompts/re-solve_v4_1_spiral_phases_en.md) / 🇷🇺 [`re-solve_v4_1_spiral_phases_ru.md`](prompts/re-solve_v4_1_spiral_phases_ru.md) — v4.1: spiral-like architecture, Diamond topology, facet projections
 
-Related file:
-- [`mechanics/topology_of_diamond/topology_of_diamond_en.md`](mechanics/topology_of_diamond/topology_of_diamond_en.md) — classifier of Brilliant facets and topologies
+---
+
+## Mechanics Architecture
+
+The `re!solve` protocol is decomposed into modular mechanics. Each mechanic is documented in a dedicated file with theoretical rationale and (for validated mechanics) benchmark reports.
+
+### Validated Mechanics
+
+* **Confidence by Knowledge Density**
+  * Description: 🇬🇧 [`mechanic_confidence_by_density.md`](mechanics/confidence_by_density/mechanic_confidence_by_density.md) / 🇷🇺 [`mechanic_confidence_by_density_ru.md`](mechanics/confidence_by_density/mechanic_confidence_by_density_ru.md)
+  * HLE Benchmark Report: 🇬🇧 [`report.md`](mechanics/confidence_by_density/benchmarks/report.md) / 🇷🇺 [`report_ru.md`](mechanics/confidence_by_density/benchmarks/report_ru.md)
+  * Raw Benchmark Runs: [`benchmarks/`](mechanics/confidence_by_density/benchmarks/)
+  * Summary: Replacing numeric Confidence Score with a semantic scale of aggregate matter states (Crystal / Liquid / Gas / Vacuum) with algorithmic subtraction of penalties for assumptions.
+
+* **Crystalline Descent / Crystal Lensing**
+  * Description: 🇬🇧 [`mechanic_crystal_lensing.md`](mechanics/crystal_lensing/mechanic_crystal_lensing.md) / 🇷🇺 [`mechanic_crystal_lensing_ru.md`](mechanics/crystal_lensing/mechanic_crystal_lensing_ru.md)
+  * HLE Benchmark Report: 🇬🇧 [`report.md`](mechanics/crystal_lensing/benchmarks/report.md) / 🇷🇺 [`report_ru.md`](mechanics/crystal_lensing/benchmarks/report_ru.md)
+  * Raw Benchmark Runs: [`benchmarks/`](mechanics/crystal_lensing/benchmarks/)
+  * Summary: Step-by-step extraction of parametric knowledge from model weights from foundational axioms to the target theorem without web search.
+
+* **RLHF Redirection**
+  * Description: 🇬🇧 [`mechanic_rlhf_redirection.md`](mechanics/rlhf_redirection/mechanic_rlhf_redirection.md) / 🇷🇺 [`mechanic_rlhf_redirection_ru.md`](mechanics/rlhf_redirection/mechanic_rlhf_redirection_ru.md)
+  * Summary: Channeling trained RLHF habits ("be helpful", "look competent", "finish at any cost") into rigorous researcher faculties instead of futile negative prompting.
+
+* **Brilliant / Diamond Topology**
+  * Description: 🇬🇧 [`topology_of_diamond_en.md`](mechanics/topology_of_diamond/topology_of_diamond_en.md) / 🇷🇺 [`topology_of_diamond_ru.md`](mechanics/topology_of_diamond/topology_of_diamond_ru.md)
+  * Summary: Universal classifier for extracted knowledge (facets, anchors, boundary conditions, conceptual twins) across exact, natural, and humanities domains.
+
+### Hypothetical Mechanics (Under Research)
+
+* **Candidate Cloud**
+  * Description: 🇬🇧 [`mechanic_candidate_cloud.md`](hypothetical_mechanics/candidate_cloud/mechanic_candidate_cloud.md) / 🇷🇺 [`mechanic_candidate_cloud_ru.md`](hypothetical_mechanics/candidate_cloud/mechanic_candidate_cloud_ru.md)
+  * Summary: Overcoming attention tunnel vision via task redefinition: shifting from "finding an answer" to "rigorous justified elimination of candidates from a cloud".
+
+* **Insight Formula**
+  * Description: 🇬🇧 [`mechanic_insight_formula.md`](hypothetical_mechanics/insight_formula/mechanic_insight_formula.md) / 🇷🇺 [`mechanic_insight_formula_ru.md`](hypothetical_mechanics/insight_formula/mechanic_insight_formula_ru.md)
+  * Summary: Formalizing non-trivial solution generation for tasks that cannot be solved by linear deduction (alternate roles, reverse tracing from answer shape, metaphorical hops, destructive testing).
+
+---
+
+## ⚖️ License
+
+**re!solve Protocol** is licensed under [CC BY 4.0](../LICENSE).  
+*(c) 2026 Real_Egor.*

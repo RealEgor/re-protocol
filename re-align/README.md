@@ -92,13 +92,13 @@ Separately — **handling praise and criticism.** The model doesn't ignore feedb
 
 ## 📂 File Structure
 
-The `prompts/` folder contains three versions of the protocol:
+The `prompts/` folder contains the following versions of the protocol:
 
 * 🇬🇧 **[re-align_v2_en.md](prompts/re-align_v2_en.md)** / 🇷🇺 **[re-align_v2_ru.md](prompts/re-align_v2_ru.md)** — Full versions
   * **For:** Claude 3.5 Sonnet, GPT-4o, Gemini 1.5 Pro, DeepSeek-V3.
   * **Features:** Full four-dimensional justification, complete maneuver registry, M×D collision matrix, exit checklist. Ideal for agents handling long multi-turn dialogues with frequent context shifts.
 
-* 🇬🇧 **[re-align_v2_en_compact.md](prompts/re-align_v2_en_compact.md)** — Compact version
+* 🇬🇧 **[re-align_v2_en_compact.md](prompts/re-align_v2_en_compact.md)** / 🇷🇺 **[re-align_v2_ru_compact.md](prompts/re-align_v2_ru_compact.md)** — Compact versions
   * **For:** API usage, local models (Llama 3, Qwen-2.5), strict token budget.
   * **Features:** Only directives, the matrix, and the maneuver registry. No explanatory padding.
 

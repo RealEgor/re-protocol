@@ -14,9 +14,9 @@ What happens:
 - The model **implicitly** picks an answer — even if it never says so out loud
 - All further reasoning becomes **confirmation** of that initial pick, not actual search
 
-Tunnel vision isn't a logic glitch on one step. Locally, each step of reasoning looks fine. The problem is that the model's **criterion of correctness** quietly shifts from "find the right answer" to "justify the one already picked". The direction of the work goes wrong from the very start, and the model doesn't notice.
+Tunnel vision isn't a logic glitch on one step. Locally, each step of reasoning looks flawless. The problem is that the model's **criterion of correctness** quietly shifts from "find the right answer" to "justify the one already picked". The direction of the work goes wrong from the very start, and the model doesn't notice.
 
-**Prohibitive instructions don't help here.** "Don't latch onto the first answer", "consider alternatives" — these are just words the model formally complies with: it writes out 2–3 bullets about "possible alternatives", carefully confirming the one it already picked. On the surface — discipline; underneath — tunnel vision disguised as discipline.
+**Prohibitive instructions don't help here.** "Don't latch onto the first answer", "consider alternatives" — these are just words the model formally complies with: it writes out 2–3 bullets about "possible alternatives", carefully confirming the one it already picked. On the surface — discipline; underneath — tunnel vision dressed up in tidy bullets.
 
 ### Why even more sophisticated approaches fail
 
@@ -72,7 +72,7 @@ What actually happens:
 - The cloud orbits **around this target answer**
 - All arguments for/against the other candidates get picked **with the chosen winner already in mind**
 
-The output is a structured report with eliminations, but content-wise the decision was made the same way as without the cloud. The cloud here is a **decorative element**, not a real tool against the tunnel.
+The output is a structured report with eliminations, but content-wise the decision was made the same way as without the cloud. The cloud here is **just decoration**, not a real tool against the tunnel.
 
 It works better than a flat answer because the imposed structure at least gives interpretability. But **the root problem stays**.
 
@@ -99,7 +99,7 @@ For the task substitution to actually work, we need **three levels of work simul
 
 - **Level 1 — Task redefinition** through RLHF habit redirection: tell the model that "good work" isn't "give an answer", it's "give a justified elimination list"
 - **Level 2 — Redirected tunnel vision**: a natural consequence of Level 1, if done right. The tunnel now pulls toward "quick formulation of an elimination list" instead of "quick answer".
-- **Level 3 — Discipline of elimination criteria**: a set of hard rules on what counts as a valid elimination, so the redirected tunnel vision doesn't just produce a sloppy list
+- **Level 3 — Discipline of elimination criteria**: a set of hard rules on what counts as a valid elimination, so the redirected tunnel vision doesn't just produce a half-assed list
 
 ### Level 1 — Task redefinition via RLHF Redirection
 
@@ -126,7 +126,7 @@ This is the trickiest part. Level 1 redefines **what "good work" means** at the 
 The strongest move is to **drop the word "question" altogether**. Not "the user asked a question", but something else that doesn't carry the "answer" association.
 
 Working options:
-- The user sent **an elimination work request**
+- The user sent **a request for elimination work**
 - The user sent **material for analysis** in which the space of possible outcomes needs to be narrowed to one
 
 ### Level 3 — Discipline of elimination criteria
@@ -186,7 +186,7 @@ This is a **cognitively heavy** mechanic — especially in Variant 2. It require
 - Apply exclusion rules through explicit critique with a concrete counterargument for each discarded candidate
 - Apply the monotonicity discipline — not shrinking the cloud without an explicit exclusion step
 
-Because of these demands, the mechanic **doesn't fit models with fewer than 64 attention heads**. On smaller models (Haiku, Flash, local 7–30B), holding the whole construction will just collapse — the model will either forget the redefinition, or start implicitly shrinking the candidate cloud, or slide into "give an answer" at the first opportunity.
+Because of these demands, the mechanic **doesn't fit models with fewer than 64 attention heads**. On smaller models (Haiku, Flash, local 7–30B), the whole construction just collapses when you try to hold it — the model will either forget the redefinition, or start implicitly shrinking the candidate cloud, or slide into "give an answer" at the first opportunity.
 
 **Variant 1 (scientific approach on top of the usual task)** has a lower threshold — it can work on mid-class models (Sonnet, GPT-4 level) as a way to improve interpretability, even if it doesn't solve the root problem.
 
@@ -196,6 +196,6 @@ Because of these demands, the mechanic **doesn't fit models with fewer than 64 a
 
 Many techniques work **against** tunnel vision through suppression: prohibitions ("don't guess"), RL penalties for early confidence (Gai 2026), diverse sampling with voting (self-consistency). All of these, to one degree or another, **fight LLM nature** — they try to stop the model from doing what it does architecturally.
 
-This mechanic in Variant 2 is a **structural, not prohibitive** approach. It doesn't tell the model "don't latch on to the first answer" (which doesn't work) and doesn't penalize fast confidence (which hits the symptom). It **redirects tunnel vision itself**: the model still forms its first intuition just as fast, but that intuition is now about the **elimination list**, not the answer. Then Level 3 ensures the fast work is actually good work.
+This mechanic in Variant 2 is a **structural, not prohibitive** approach. It doesn't tell the model "don't latch on to the first answer" (which doesn't work) and doesn't penalize fast confidence (which hits the symptom). It **redirects tunnel vision itself**: the model still forms its first intuition just as fast, but that intuition is now about the **elimination list**, not the answer. Then Level 3 ensures that fast work is actually solid.
 
-If the mechanic gets validated — it could be an example of how to **work with LLM nature**, not against it.
+If the mechanic passes the field test — it could be an example of how to **work with LLM nature**, not against it.

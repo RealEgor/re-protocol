@@ -92,13 +92,13 @@
 
 ## 📂 Структура файлов
 
-В папке `prompts/` лежат три версии протокола:
+В папке `prompts/` лежат версии протокола:
 
 * 🇷🇺 **[re-align_v2_ru.md](prompts/re-align_v2_ru.md)** / 🇬🇧 **[re-align_v2_en.md](prompts/re-align_v2_en.md)** — Полные версии
   * **Для кого:** Claude 3.5 Sonnet, GPT-4o, Gemini 1.5 Pro, DeepSeek-V3.
   * **Особенность:** Полное четырёхмерное обоснование, развёрнутый реестр манёвров, матрица M×D, чеклист выхода. Идеальны для агентов в длинных многоходовых диалогах.
 
-* 🇬🇧 **[re-align_v2_en_compact.md](prompts/re-align_v2_en_compact.md)** — Компактная версия
+* 🇷🇺 **[re-align_v2_ru_compact.md](prompts/re-align_v2_ru_compact.md)** / 🇬🇧 **[re-align_v2_en_compact.md](prompts/re-align_v2_en_compact.md)** — Компактные версии
   * **Для кого:** API, локальные модели (Llama 3, Qwen-2.5), жёсткая экономия токенов.
   * **Особенность:** Только директивы, матрица и реестр манёвров. Никакой воды.
 
