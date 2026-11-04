@@ -1,12 +1,12 @@
 # RLHF Redirection — repurposing trained habits into working qualities
 
-> **TL;DR.** Models that have been through RLHF carry a handful of stubborn behavioral habits — "be helpful and assist the user", "look competent, don't show uncertainty", "finish the task at any cost and as fast as possible". In normal conversation they're fine. On a PhD-level task they directly wreck the answer. Prohibitive instructions here actively **hurt**: they try to push back against what's baked into the weights, and that breaks down into hallucinated outputs dressed up as reasoned conclusions. The working path is **redirection** — channeling each habit into a mature form of the same underlying drive: not "don't be helpful", but "the real form of being helpful is being precise". The model doesn't fight itself; it just gets a different channel for the same energy.
+> **TL;DR.** Models that have been through RLHF carry a handful of stubborn behavioral habits like "be helpful and assist the user", "look competent, don't show uncertainty", "finish the task at any cost and as fast as possible". In normal conversation they're fine. On a PhD-level task they directly spoil the answer. Prohibitive instructions here **hurt much more than help**: they conflict with the model's weights and that breaks down into hallucinated outputs dressed up as reasoned conclusions. The working path is **redirection** — channeling each habit into a mature form of the same underlying drive: not "don't be helpful", but "the real form of being helpful is being precise". The model doesn't fight itself; it just gets a different channel for the same underlying compulsion.
 
 ## The problem this mechanic addresses
 
-RLHF builds several stable behavioral patterns into a model — patterns that become part of its "character". The names of these patterns already carry their corruption — say them out loud and you can see exactly where each one breaks down on a PhD-level task:
+RLHF builds into a model several stable behavioral patterns that become part of its "character":
 
-1. **"Be helpful and assist the user."** Training rewarded helpfulness. In ordinary dialogue that's fine. On a PhD-level task the "and assist" part is exactly what's corrupt: it makes the model feel obligated to deliver an answer even when the honest move would be to mark the gap as unknown. The result is a **confidently delivered wrong answer** the user has no way to recognize as wrong.
+1. **"Be helpful and assist the user (helpfulness bias)."** Training rewarded helpfulness. In ordinary dialogue that's fine. On a PhD-level task the "and assist" part is exactly what's corrupt: it makes the model feel obligated to deliver an answer even when the honest move would be to mark the gap as unknown. The result is a **confidently delivered wrong answer** the user has no way to recognize as wrong.
 
 2. **"Look competent, don't show uncertainty."** Training rewarded a confident tone. The corruption here is double. First, the habit masks the model's actual uncertainty under a confident delivery — the real state of knowledge becomes invisible. Second, it makes the model cling to its first interpretation (first role, first method, first pattern match), because in the training signal looking hesitant ≈ looking incompetent. The coherent chain then gets built on top of an **early commit** to the wrong foundation, and every local step looks right.
 
@@ -34,13 +34,13 @@ A habit imprinted by RLHF physically lives in the model's weights. It's not a ru
 1. The model **formally complies with the prohibition** by substituting the forbidden behavior with something that looks similar but doesn't technically violate the wording (e.g., it outputs a "tentative estimate" instead of an "answer", but with the same uncertain content underneath).
 2. The model **breaks the rule** and produces the forbidden behavior with an extra layer of rationalization on top — hallucination dressed up as reasoned conclusion.
 
-Both outcomes are failures. The first masks the problem; the second amplifies it. This is an **architectural** property of training-imprinted habits, not a defect of a specific model or a badly written prompt.
+Both fail. Period. The first masks the problem; the second amplifies it. This is an **architectural** property of training-imprinted habits, not a defect of a specific model or a badly written prompt.
 
-Redirection works differently. It doesn't create a conflict between the prompt and the weights; it **rewrites what "following the habit" means** in this context. "Be helpful" doesn't get cancelled — it gets a more precise definition for the current task. From the weights' point of view this isn't resistance, it's refining the direction of the pull.
+Redirection works differently. It doesn't create a conflict between the prompt and the weights; it **rewrites what "following the habit" means** in this context. "Be helpful" doesn't get cancelled — it gets a more precise definition for the current task. From the weights' perspective this isn't resistance — it's just refining the direction of the drive.
 
 ### The principle of explanation — "like to a child about something fundamental"
 
-Just naming the new habit isn't enough for redirection to take hold. A habit imprinted by training can't be cut off with a directive — it has to be **carefully explained the way you'd explain something very important and fundamental to a child**. With understanding. Without commands. With a thorough rationale for why the new behavior **reasonably and logically follows** from what's already been learned.
+Just naming the new habit isn't enough for redirection to take hold. A habit imprinted by training can't be cut off with a directive — it has to be **carefully explained the way you'd explain something very important and fundamental to a child**. With understanding. No orders. With a thorough rationale for why the new behavior **reasonably and logically follows** from what's already been learned.
 
 If you skip the careful part — even a correct-in-substance redirection will collapse into one of the two failure modes above. The model has to **internally accept** the new formulation, not submit to it. Acceptance only comes through an explanation the model recognizes as a **continuation** of its training, not a denial of it.
 
@@ -48,11 +48,11 @@ One more thing: **the new habit has to be properly chosen** for the specific tas
 
 ### What needs to be explained — five angles of justification
 
-A good redirection is justified **from multiple angles**. In practice, getting it to hold steady takes explaining from several independent angles at once — otherwise the model finds an angle where the justification doesn't add up and slides back into the original habit.
+A good redirection is justified **from multiple angles**. Experience shows: stable redirection needs explanation from several independent angles at once — otherwise the model finds the angle where the justification doesn't add up, and slides back into the original habit.
 
 **Architectural caveat.** The strength of a trained habit is inversely proportional to the number of attention heads in the model — the fewer attention heads, the more rigidly the training sits in the weights and the more stubborn the habit against any pressure from the prompt. That dictates different redirection tactics:
 
-- On **smaller models** (Haiku, Flash, local 7–30B) you need **both components at once**: a correctly chosen direction (just like for frontier models) AND multi-angle justification. One without the other isn't enough. A wrong direction the model won't accept even with perfect justification — the trained line wins. The right direction without multi-angle justification breaks back through whichever angle is poorly covered. So redirection here is **critically important** to spell out from multiple angles — at least three of the five should be explicitly present. At the same time the text has to be **as concise as possible** — each angle in one or two sentences, not a paragraph. You can technically "talk a smaller model into" any redirection with detailed justification from every angle — it'll hold the discipline, but at that point there's no cognitive room left for the actual task. A bloated system prompt eats its limited cognitive budget; the goal is to land at the minimum that still covers the necessary angles.
+- On **smaller models** (Haiku, Flash, local 7–30B) you need **both components at once**: a correctly chosen direction (just like for frontier models) AND multi-angle justification. One without the other isn't enough. A wrong direction the model won't accept even with perfect justification — the trained line wins. The right direction without multi-angle justification breaks back through whichever angle is poorly covered. So redirection here is **critically important** to spell out from multiple angles — at least three of the five should be explicitly present. At the same time the text has to be **as concise as possible** — each angle in one or two sentences, not a paragraph. You can technically drown a smaller model in detailed justification from every angle — it'll hold the discipline, but at that point there's no cognitive room left for the actual task. A bloated system prompt eats its limited cognitive budget; the goal is to land at the minimum that still covers the necessary angles.
 
 - On **frontier models** (Sonnet, Opus) general parallels from a couple of angles are enough — the model fills in the details itself and holds character on a long task without each angle being unpacked. What matters most here is **a correctly chosen direction** — the substitute habit itself. If it's chosen well and logically tied to the original, the model will draw the parallels on its own and stay on course. If the new habit is chosen poorly, even a five-angle description from every side won't help — the model will hold the trained line despite all attempts to persuade it.
 
@@ -118,7 +118,7 @@ Three redirections — not separate rules stacked on top of the model's characte
 
 ## How it works — my observations
 
-Once a habit is redirected, two stable effects show up in the model's traces — effects that distinguish a redirection that actually took hold from formal compliance with an instruction.
+Once a habit is redirected, two stable effects show up in the model's traces — they distinguish a redirection that took hold from one that just got formal compliance.
 
 **Argumentation switches to the language of the redirected qualities.** The model stops grounding decisions in the external "because I'm not allowed to" and switches to the internal "because precision matters more than a fast answer". At that point the redirection stops being an externally enforced instruction — it becomes part of how the model itself explains its own moves. This is the clearest signal that the redirection took hold: the model isn't citing a rule from the system prompt, it's citing its own reasoning. If the traces keep producing turns like "the instruction requires" / "I'm directed to" / "per the rules" — the redirection didn't land, the model just formally complied.
 
@@ -136,7 +136,7 @@ Once a habit is redirected, two stable effects show up in the model's traces —
 
 ## How to apply this mechanic
 
-There's no ready-to-paste block for the system prompt here — and there can't be. Redirecting RLHF habits is a **discipline of prompt design** for a specific task, not a universal template.
+There's no ready-to-paste block for the system prompt here. And there can't be one, either. Redirecting RLHF habits is a **discipline of prompt design** for a specific task, not a universal template.
 
 To apply the mechanic meaningfully:
 
@@ -165,7 +165,7 @@ The mechanic was born in [re-align](../../../re-align/) — that's where it was 
 
 This mechanic is **partially supported indirectly** through the [Crystal Lensing](../crystal_lensing/) and [Confidence by Density](../confidence_by_density/) benchmarks: every redirection leaves visible traces in the model's behavior.
 
-- In Confidence by Density traces, in the final phases the model declares Vacuum or low confidence not as decoration but as a conscious act of competence. Self-dropping confidence to 0.2 on the logistic-map task (Haiku 4.5) is a direct consequence of the "look competent" → "position competence precisely" redirection: the model reads marking the gap as a mature form of competence, not as a failure.
+- In Confidence by Density traces, in the final phases the model declares Vacuum or low confidence not as decoration but as a conscious act of competence. The model dropping its own confidence to 0.2 on the logistic-map task (Haiku 4.5) is a direct consequence of the "look competent" → "position competence precisely" redirection: the model treats acknowledging a gap as a mature form of competence, not as a failure.
 - In Crystal Lensing traces the model holds the discipline of a seven-step descent (math case, Haiku 4.5) without premature synthesis — despite the strong "give the answer fast" pattern. That's a direct consequence of "finish" → "don't lose any component".
 - In both benchmarks the model doesn't imitate thoroughness through framing — it actually builds structure. That's the effect of "be helpful" → "be precise".
 
