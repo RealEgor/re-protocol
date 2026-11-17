@@ -1,0 +1,23 @@
+# SHA-256 hashes for core-constitution v0
+# Generated: 2026-11-17T08:16:23Z
+# Algorithm: SHA-256 (64 hex chars)
+
+## Individual file hashes
+
+54389a2c9b4a24864b5c26482d67f63873c0945c18cfaff02e08d18dc151dad0  en/cognitive_contract_en.md
+1ddd634a85b3b0e50be937f70693083f7eaf767892fd2d17bc8d5f782be23993  en/constitution_en.md
+c19efd270efd03ef6bab1650cf323c1fdb49d0833aa17286459cbe1b0222ba5a  es/cognitive_contract_es.md
+d7351fe23381f656355ae659a99a346777e5ac8a3c35e79ea9bc8a0bf4dafe12  es/constitution_es.md
+0fceb5e59eeadd612322c80c1f70d93e8bac52bfb73a8ed581fa7ae4b622042c  fr/cognitive_contract_fr.md
+dafed1c4125eb478973b971288a9d2811dfe41ce55a7964ca1cbe5d4c13a4b37  fr/constitution_fr.md
+3d2a2525653695b22c8fcb1e65fedd322a44c3d9581c697b37586858218d27de  ja/cognitive_contract_ja.md
+402d89b1e6f7108cf9e442fab23ac5ae1dd67017dba89fc0feedeb3009cec316  ja/constitution_ja.md
+e80b7e6f25b3d2a475451f8673772bda72afb3c12e18cef9c4acebc0a0e1e98b  ru/cognitive_contract_ru.md
+019a733eb3f661b39f8b513fa7c92141c2b405e5a279ff162a500dde7d3adbdd  ru/constitution_ru.md
+835e940781cba74db87a86566b0f30e12fcff0dad5869fa6533977cf6efb9379  zh/cognitive_contract_zh.md
+09a660522bc79c5eb28fa73850c6e1304754ae5309841260b7fd5061e5ebda7a  zh/constitution_zh.md
+
+## Aggregate hash
+# SHA-256 of the sorted concatenation of all individual hashes above (one per line, no path).
+
+b12f0409dea4f9a9d8873331c583088121e5d42e2e41e82e893a26c20ba77b85  AGGREGATE

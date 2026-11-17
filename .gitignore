@@ -22,3 +22,7 @@ env/
 # Logs / temp
 *.log
 *.tmp
+
+# Meta-work (per-folder work notes, signatures, decision logs)
+.meta/
+**/.meta/
