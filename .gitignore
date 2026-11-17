@@ -26,3 +26,7 @@ env/
 # Meta-work (per-folder work notes, signatures, decision logs)
 .meta/
 **/.meta/
+
+# Agent's operational intents log — persistent task tree, private to our work.
+# Never publish. Lives at the repo root only.
+/intents.md
