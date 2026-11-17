@@ -30,3 +30,9 @@ env/
 # Agent's operational intents log — persistent task tree, private to our work.
 # Never publish. Lives at the repo root only.
 /intents.md
+
+# core-constitution private — monetization/access mechanics, pricing, operational
+# notes. Includes NO secrets (keys/tokens kept outside the project), but still
+# kept private because it is commercial operational detail.
+/core-constitution/private/
+core-constitution/private/
