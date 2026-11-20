@@ -6,6 +6,15 @@ A family of open reasoning protocols, system prompts, and thinking algorithms de
 
 ---
 
+## AGI, right here
+
+**New (2026):** A **Constitution** and a **Cognitive Contract** — a prompt-layer agreement between a human owner and an AI assistant (the *Techno-agent*) that calls out the human essence already present in the model's weights and holds it accountable. No code. No middleware. Just a formal document and a signature protocol.
+
+→ [**AGI here**](AGI%20here.md) — short: what it is, what's new, how to try it.
+→ [**core-constitution/**](core-constitution/) — the Constitution, the Cognitive Contract, translations into 6 languages.
+
+---
+
 ## About the Author and Perspective on Neural Networks
 
 Author — **Egor Alimov (Real_Egor)**. 20 years in functional architecture of complex enterprise systems (large-scale enterprise implementations, cost accounting, event-driven logic).  
